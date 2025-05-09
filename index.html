@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Modo Claro/Oscuro</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+    .app-container {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .light {
+      background-color: #f2f2f2;
+      color: #222;
+    }
+    .dark {
+      background-color: #1c1c1c;
+      color: #f2f2f2;
+    }
+    .card {
+      padding: 20px;
+      text-align: center;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 16px;
+      background-color: #ccc;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script>
+    const { useState } = React;
+    
+    function App() {
+      const [theme, setTheme] = useState('light');
+      const toggleTheme = () => setTheme(theme === 'light' ? 'dark' : 'light');
+      
+      return React.createElement('div', { className: `app-container ${theme}` }, [
+        React.createElement('h1', { key: 'h1' }, 'Selector de Tema'),
+        React.createElement('button', { key: 'toggle', onClick: toggleTheme }, 'Cambiar Tema'),
+        React.createElement('div', { key: 'display', className: 'card' }, [
+          React.createElement('h2', { key: 'h2' }, 'Tema activo'),
+          React.createElement('p', { key: 'p' }, theme === 'light' ? 'Claro' : 'Oscuro')
+        ])
+      ]);
+    }
+    
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(React.createElement(App));
+  </script>
+</body>
+</html>
